@@ -9,6 +9,8 @@ require "fileutils"
 
 FileUtils.cp("#{File.dirname(__FILE__)}/../lib/templates/commit-msg.rb", "#{FileUtils.pwd}/.git/hooks/commit-msg")
 FileUtils.chmod 0755, "#{FileUtils.pwd}/.git/hooks/commit-msg"
-FileUtils.cp("#{File.dirname(__FILE__)}/../lib/templates/#{ARGV[0]}.rb", "#{FileUtils.pwd}/.hookr")
+unless File.exist?("#{FileUtils.pwd}/.hookr")
+  FileUtils.cp("#{File.dirname(__FILE__)}/../lib/templates/#{ARGV[0]}.rb", "#{FileUtils.pwd}/.hookr")
+end
 
 puts "Yo dawg I herd u like commit hooks, so I put some files in ur directories."
