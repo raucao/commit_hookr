@@ -20,7 +20,9 @@ CommitHookr.call do
     api_key = `git config codebase.apikey`.strip
     domain = `git config codebase.domain`.strip
     
-    tickets = Tickets.new(:user => user, :api_key => api_key, :domain => domain, :project => CODEBASE_PROJECT).all["tickets"]
+    tickets = Tickets.new( :user => user, :api_key => api_key, :domain => domain, 
+      :project => CODEBASE_PROJECT ).all("assignee:#{user} sort:id order:asc")["tickets"]
+      
     puts "---"
     tickets.each do |ticket|
       puts "#{ticket["ticket_id"]}: #{ticket["summary"]}"
