@@ -5,14 +5,15 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "commit_hookr"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = "Configurable git commit hooks for your team"
+    gem.description = ""
     gem.email = "info@sebastiankippe.de"
     gem.homepage = "http://github.com/skddc/commit_hookr"
-    gem.authors = ["Sebastian Kippe"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    gem.add_development_dependency "cucumber", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.authors = ["Michael Bumann", "Sebastian Kippe"]
+    gem.executables = ["hookr"]
+    gem.files = FileList["*.rb","bin/*", "lib/**/*", "features/**/*", "test/**/*"]
+    gem.add_dependency "highline"
+    gem.add_development_dependency "cucumber"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

@@ -1,6 +1,20 @@
 = commit_hookr
 
-Description goes here.
+Configurable Git commit hooks for your team. Currently comes only with a Codebase commit menu.
+
+== Usage
+
+1. Install the gem
+
+    gem install commit_hookr
+    
+2. In your Git project's root:
+
+    hookr codebase
+    
+3. Edit .hookr to your liking. If you want to use Codebase ticket listing, you need to configure the codebase project name.
+
+4. Never forget to put ticket ids and time in your commit messages again. ;)
 
 == Note on Patches/Pull Requests
  
@@ -14,4 +28,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2010 Sebastian Kippe. See LICENSE for details.
+Copyright (c) 2010 Michael Bumann, Sebastian Kippe. See LICENSE for details.
