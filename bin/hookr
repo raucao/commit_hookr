@@ -1,16 +1,68 @@
 #!/usr/bin/env ruby
 
+require "fileutils"
+
+usage_info = "Usage: hookr init [template]"
+usage_info += "\nCurrently your only template option is 'codebase'"
+
+working_directory = FileUtils.pwd
+commit_msg_file   = "#{working_directory}/.git/hooks/commit-msg"
+hookr_file        = "#{working_directory}/.hookr"
+
 if ARGV.size == 0
-  puts File.read("../README.rdoc")
+  puts usage_info
+  exit 1
+elsif !File.exist?("#{working_directory}/.git")
+  puts "You should do this in the root directory of a Git project."
   exit 1
 end
 
-require "fileutils"
-
-FileUtils.cp("#{File.dirname(__FILE__)}/../lib/templates/commit-msg.rb", "#{FileUtils.pwd}/.git/hooks/commit-msg")
-FileUtils.chmod 0755, "#{FileUtils.pwd}/.git/hooks/commit-msg"
-unless File.exist?("#{FileUtils.pwd}/.hookr")
-  FileUtils.cp("#{File.dirname(__FILE__)}/../lib/templates/#{ARGV[0]}.rb", "#{FileUtils.pwd}/.hookr")
+case ARGV[0]
+  
+when "init"
+  case ARGV[1]
+  when nil
+    puts usage_info
+    exit 1
+  when "codebase"
+    puts "Yo dawg I herd u like commit hooks, so I put some file in ur directories:\n\n"
+    unless File.exist?(hookr_file)
+      FileUtils.cp "#{File.dirname(__FILE__)}/../lib/templates/#{ARGV[1]}.rb", hookr_file
+      puts "    added: .hookr"
+    else
+      puts "   exists: .hookr"
+    end
+    unless File.exist?(commit_msg_file)
+      FileUtils.cp "#{File.dirname(__FILE__)}/../lib/templates/commit-msg.rb", commit_msg_file
+      puts "    added: .git/hooks/commit-msg"
+    else
+      FileUtils.cp "#{File.dirname(__FILE__)}/../lib/templates/commit-msg.rb", commit_msg_file
+      puts "  updated: .git/hooks/commit-msg"
+    end
+    FileUtils.chmod 0755, commit_msg_file
+    puts "\n"
+    exit 0
+  else
+    puts "Sorry, the only template available right now is 'codebase'. You can add your own .hookr template, of course."
+    exit 1
+  end
+when "clear"
+  if File.exist?(commit_msg_file) && File.exist?(hookr_file)
+    puts "Well then, if it makes you happy...\n\n"
+    if File.exist?(hookr_file)
+      FileUtils.rm hookr_file
+      puts "  removed: .hookr"
+    end
+    if File.exist?(commit_msg_file)
+      FileUtils.rm commit_msg_file
+      puts "  removed: .git/hooks/commit-msg"
+    end
+    puts "\n"
+    exit 0
+  else
+    puts "There's nothing to clear."
+  end
+  exit 0
+else
+  puts usage_info
 end
-
-puts "Yo dawg I herd u like commit hooks, so I put some files in ur directories."
