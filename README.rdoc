@@ -1,6 +1,8 @@
 = commit_hookr
 
-Configurable Git commit hooks for your team. Currently comes only with a Codebase commit menu.
+Git commit-msg hook templates for your team. Currently comes only with a hook template for an interactive commit menu, because that's what we needed it for.
+
+commit_hookr makes it easy to enforce commit message policies. We use it to make sure we don't forget to add our Codebase ticket numbers and times to the commit message. As the hook itself is checked into the project repository, it's automatically updated for all team members after their next pull when you change something.
 
 == Usage
 
@@ -10,11 +12,21 @@ Configurable Git commit hooks for your team. Currently comes only with a Codebas
     
 2. In your Git project's root:
 
-    hookr codebase
+    hookr init codebase
     
 3. Edit .hookr to your liking. If you want to use Codebase ticket listing, you need to configure the codebase project name.
 
-4. Never forget to put ticket ids and time in your commit messages again. ;)
+4. Enjoy.
+
+There's also a shortcut for removing the commit_hookr files:
+
+    hookr clear
+    
+== Issues
+
+Committing with GitX won't work after initializing the Codebase hook. It's still a useful tool though, you just won't be able to hit the commit button.
+
+If you come across any, either fix the problem and send me a pull request, or post it to http://github.com/skddc/commit_hookr/issues .
 
 == Note on Patches/Pull Requests
  
