@@ -4,8 +4,8 @@ Feature: commit_hookr Command Line Interface
   I want to use the hookr command to add and remove commit hooks
 
   Background:
-    Given a directory named "~/some_project"
-    And I cd to "~/some_project"
+    Given a directory named "some_project"
+    And I cd to "some_project"
     And I run "git init"
 
   Scenario: Run hookr in a directory that's not a Git project root
@@ -36,7 +36,7 @@ Feature: commit_hookr Command Line Interface
       | .git/hooks/commit-msg |
     
   Scenario: Clear commit hook
-    When I run hookr with "init codebase"
+    Given I run hookr with "init codebase"
     When I run hookr with "clear"
     Then I should see "Well then, if it makes you happy..."
     
