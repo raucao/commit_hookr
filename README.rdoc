@@ -8,11 +8,11 @@ commit_hookr makes it easy to enforce commit message policies. We use it to make
 
 1. Install the gem
 
-  gem install commit_hookr
+    gem install commit_hookr
     
 2. In your Git project's root:
 
-  hookr init codebase
+    hookr init codebase
     
 3. Edit .hookr to your liking. If you want to use Codebase ticket listing, you need to configure the codebase project name.
 
